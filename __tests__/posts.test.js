@@ -50,7 +50,7 @@ describe('post routes', () => {
     expect(resp.body).toMatchInlineSnapshot(`
       Object {
         "content": "im mr meeseeks",
-        "created_at": "2022-12-08T22:52:35.148Z",
+        "created_at": "2022-12-08T23:16:13.779Z",
         "id": "1",
         "title": "look at me",
         "user_id": "1",
@@ -58,6 +58,5 @@ describe('post routes', () => {
     `);
 
     await request(app).get('/api/v1/posts');
-   
   });
 });
