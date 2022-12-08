@@ -6,9 +6,7 @@ const { agent } = require('supertest');
 
 jest.mock('../lib/services/GitHubService');
 
-
-
-
+///aaa///
 
 describe('github auth', () => {
   beforeEach(() => {
@@ -48,8 +46,6 @@ it('DELETE /api/v1/github should logout a user', async () => {
   const loggedOut = await agent(app).get('/api/v1/github/dashboard');
   expect(loggedOut.status).toBe(401);
 });
-
-
 
 afterAll(() => {
   pool.end();
