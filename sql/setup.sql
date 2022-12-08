@@ -25,7 +25,7 @@ CREATE TABLE github_users (
   user_id BIGINT,
   title VARCHAR,
   content VARCHAR,
-  created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+  
   FOREIGN KEY (user_id) REFERENCES github_users(id)
   );
 

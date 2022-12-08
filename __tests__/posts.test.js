@@ -50,7 +50,6 @@ describe('post routes', () => {
     expect(resp.body).toMatchInlineSnapshot(`
       Object {
         "content": "im mr meeseeks",
-        "created_at": "2022-12-08T23:24:46.025Z",
         "id": "1",
         "title": "look at me",
         "user_id": "1",
