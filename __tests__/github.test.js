@@ -2,6 +2,7 @@ const pool = require('../lib/utils/pool');
 const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
+const { agent } = require('supertest');
 
 jest.mock('../lib/services/GitHubService');
 
@@ -23,7 +24,7 @@ it('/api/v1/github/callback should login users to the dashboard', async () => {
     .agent(app)
     .get('/api/v1/github/callback?code=42')
     .redirects(1);
-  console.log(resp.body);
+
   expect(resp.body).toEqual({
     id: expect.any(String),
     login: 'fake_github_user',
@@ -32,6 +33,16 @@ it('/api/v1/github/callback should login users to the dashboard', async () => {
     iat: expect.any(Number),
     exp: expect.any(Number),
   });
+});
+it('DELETE /api/v1/github should logout a user', async () => {
+  const loggedIn = await agent(app).get('/api/v1/github/login');
+  expect(loggedIn.status).toBe(302);
+
+  const res = await agent(app).delete('/api/v1/github');
+  expect(res.status).toBe(204);
+
+  const loggedOut = await agent(app).get('/api/v1/github/dashboard');
+  expect(loggedOut.status).toBe(401);
 });
 afterAll(() => {
   pool.end();
