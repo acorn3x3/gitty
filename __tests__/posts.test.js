@@ -47,7 +47,15 @@ describe('post routes', () => {
         content: 'im mr meeseeks',
       })
       .expect(200);
-    expect(resp.body).toMatchInlineSnapshot();
+    expect(resp.body).toMatchInlineSnapshot(`
+      Object {
+        "content": "im mr meeseeks",
+        "created_at": "2022-12-08T23:24:46.025Z",
+        "id": "1",
+        "title": "look at me",
+        "user_id": "1",
+      }
+    `);
 
     await request(app).get('/api/v1/posts');
   });
