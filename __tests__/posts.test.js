@@ -36,7 +36,7 @@ describe('post routes', () => {
     expect(resp.body).toMatchInlineSnapshot(`Array []`);
     await request(app).get('/api/v1/posts').expect(401);
   });
-  it.only('POST /api/v1/posts should allow authenticated users to create a new post', async () => {
+  it('POST /api/v1/posts should allow authenticated users to create a new post', async () => {
     const agent = request.agent(app);
     await agent.get('/api/v1/github/callback?code=42').redirects(1);
 
@@ -58,5 +58,6 @@ describe('post routes', () => {
     `);
 
     await request(app).get('/api/v1/posts');
+   
   });
 });
