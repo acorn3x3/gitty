@@ -26,10 +26,10 @@ CREATE TABLE github_users (
   title VARCHAR,
   content VARCHAR,
   created_at TIMESTAMP NOT NULL DEFAULT NOW(),
-  FOREIGN KEY (user_id) REFERENCES users(id)
+  FOREIGN KEY (user_id) REFERENCES github_users(id)
   );
 
- 
+
     
   
   

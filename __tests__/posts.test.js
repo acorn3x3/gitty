@@ -36,20 +36,27 @@ describe('post routes', () => {
     expect(resp.body).toMatchInlineSnapshot(`Array []`);
     await request(app).get('/api/v1/posts').expect(401);
   });
+  it.only('POST /api/v1/posts should allow authenticated users to create a new post', async () => {
+    const agent = request.agent(app);
+    await agent.get('/api/v1/github/callback?code=42').redirects(1);
+
+    const resp = await agent
+      .post('/api/v1/posts')
+      .send({
+        title: 'look at me',
+        content: 'im mr meeseeks',
+      })
+      .expect(200);
+    expect(resp.body).toMatchInlineSnapshot(`
+      Object {
+        "content": "im mr meeseeks",
+        "created_at": "2022-12-08T22:45:43.739Z",
+        "id": "1",
+        "title": "look at me",
+        "user_id": "1",
+      }
+    `);
+
+    await request(app).get('/api/v1/posts');
+  });
 });
-
-// it.only('POST /api/v1/posts should allow authenticated users to create a new post', async () => {
-//   const agent = request.agent(app);
-//   await agent.get('/api/v1/github/callback?code=42').redirects(1);
-
-//   const resp = await agent
-//     .post('/api/v1/posts')
-//     .send({
-//       title: 'look at me',
-//       content: 'im mr meeseeks',
-//     })
-//     .expect(200);
-//   expect(resp.body).toMatchInlineSnapshot();
-
-//   await request(app).get('/api/v1/posts');
-// });
