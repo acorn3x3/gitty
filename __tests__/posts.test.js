@@ -33,7 +33,7 @@ describe('post routes', () => {
   it('GET /api/v1/posts should allow authenticated users to return a list of posts of all users', async () => {
     const [agent] = await registerAndLogin();
     const resp = await agent.get('/api/v1/posts').expect(200);
-    expect(resp.body).toMatchInlineSnapshot(`Array []`);
+    expect(resp.body).toMatchInlineSnapshot('Array []');
     await request(app).get('/api/v1/posts').expect(401);
   });
   it('POST /api/v1/posts should allow authenticated users to create a new post', async () => {
